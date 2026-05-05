@@ -1,5 +1,5 @@
 /-
-Copyright 2025 The Formal Conjectures Authors.
+Copyright 2026 The Formal Conjectures Authors.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -23,10 +23,10 @@ import FormalConjectures.Util.ProblemImports
 -/
 
 open Filter
+open EuclideanGeometry
 open scoped EuclideanGeometry
 
 namespace Erdos96
-open EuclideanGeometry
 open Finset
 
 /--
@@ -49,7 +49,7 @@ ensures that taking the supremum (`sSup`) is a well-defined operation. The trivi
 the total number of pairs of points, `\binom{n}{2}`.
 -/
 @[category test, AMS 52]
-theorem convexUnitDistanceCounts_BddAbove (n : ℕ) : BddAbove <| convexUnitDistanceCounts n := by
+theorem convexUnitDistanceCounts_bddAbove (n : ℕ) : BddAbove <| convexUnitDistanceCounts n := by
   unfold convexUnitDistanceCounts
   unfold unitDistancePairsCount
   use n.choose 2

@@ -67,4 +67,19 @@ theorem erdos_614 :
       ∀ n : ℕ, f n k = Nat.choose n 2 - ex n Fkmin := by
   sorry
 
+/--
+Ma and Tang's Turán-type reformulation of Erdős problem 614.
+
+For each fixed `k`, there exists a finite family of graphs `F_k^min`, depending only on `k`, such
+that
+
+`f(n,k) = (n choose 2) - ex(n, F_k^min)`.
+-/
+@[category research solved, AMS 5, formal_proof using other_system at
+  "https://github.com/QuanyuTang/erdos-614-turan-reduction"]
+theorem erdos_614.variants.ma_tang_reformulation :
+    ∀ k : ℕ, ∃ Fkmin : ForbiddenFamily,
+      ∀ n : ℕ, f n k = Nat.choose n 2 - ex n Fkmin := by
+  sorry
+
 end Erdos614

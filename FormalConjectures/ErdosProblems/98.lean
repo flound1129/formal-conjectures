@@ -22,15 +22,16 @@ import FormalConjectures.Util.ProblemImports
 *Reference:* [erdosproblems.com/98](https://www.erdosproblems.com/98)
 
 This is the direct asymptotic formulation of the problem statement:
-does the minimum number of distinct distances determined by an
+does the minimum number `h(n)` of distinct distances determined by an
 `n`-point set in the plane, subject to the usual general-position
-conditions, grow superlinearly?
+conditions, satisfy `h(n) / n → ∞`?
 
 The theorem below packages the question in the same style used by the
 `formal-conjectures` repository for other open Erdős problems.
 -/
 
 open Classical
+open Asymptotics Filter Topology
 open scoped EuclideanGeometry
 
 namespace Erdos98
@@ -62,6 +63,11 @@ def NoFourCocyclic {n : ℕ} (p : Fin n → Point) : Prop :=
 def GeneralPosition {n : ℕ} (p : Fin n → Point) : Prop :=
   Function.Injective p ∧ NoThreeCollinear p ∧ NoFourCocyclic p
 
+/-- `h(n)` is the minimum number of distinct distances determined by a
+general-position `n`-point set in the plane. -/
+noncomputable def h (n : ℕ) : ℕ :=
+  sInf {k : ℕ | ∃ p : Fin n → Point, GeneralPosition p ∧ k = (DistinctDistances p).card}
+
 /--
 Erdős Problem 98: do the minimum numbers of distinct distances determined by
 general-position `n`-point sets grow superlinearly?
@@ -71,12 +77,7 @@ question "does `h(n) / n → ∞`?".
 -/
 @[category research open, AMS 52]
 theorem erdos_98 :
-    answer(sorry) ↔
-      ∀ C : ℝ, 0 < C →
-        ∃ N : ℕ, ∀ n : ℕ, N ≤ n →
-          ∀ p : Fin n → Point,
-            GeneralPosition p →
-            (C : ℝ) * (n : ℝ) ≤ (DistinctDistances p).card := by
+    answer(sorry) ↔ Tendsto (fun n : ℕ ↦ ((h n : ℝ) / (n : ℝ))) atTop atTop := by
   sorry
 
 end Erdos98

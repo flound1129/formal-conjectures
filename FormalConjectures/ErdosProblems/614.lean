@@ -21,7 +21,7 @@ import FormalConjectures.Util.ProblemImports
 
 *References:*
 * [erdosproblems.com/614](https://www.erdosproblems.com/614)
-* Tang's Turán-type reformulation note
+* [Ma and Tang, Erdős 614 Turán-type reduction note](https://github.com/QuanyuTang/erdos-614-turan-reduction/blob/main/erdos614_note.pdf)
 -/
 
 open Classical

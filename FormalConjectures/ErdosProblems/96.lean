@@ -1,5 +1,5 @@
 /-
-Copyright 2025 The Formal Conjectures Authors.
+Copyright 2026 The Formal Conjectures Authors.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -23,22 +23,15 @@ import FormalConjectures.Util.ProblemImports
 -/
 
 open Filter
+open EuclideanGeometry
 open scoped EuclideanGeometry
 
 namespace Erdos96
-open EuclideanGeometry
 open Finset
 
 /--
-Given a finite set of points, this function counts the number of **unordered pairs** of distinct
-points that are at a distance of exactly `1` from each other.
--/
-noncomputable def unitDistancePairsCount (points : Finset ℝ²) : ℕ :=
-  (points.offDiag.filter (fun p => dist p.1 p.2 = 1)).card / 2
-
-/--
 The set of all possible numbers of unit distances determined by the vertices of a convex
-`n`-gon.
+$n$-gon.
 -/
 noncomputable def convexUnitDistanceCounts (n : ℕ) : Set ℕ :=
   {unitDistancePairsCount points | (points : Finset ℝ²) (_ : points.card = n) (_ : ConvexIndep points)}
@@ -46,10 +39,10 @@ noncomputable def convexUnitDistanceCounts (n : ℕ) : Set ℕ :=
 /--
 This lemma confirms that the set of possible unit-distance counts is bounded above, which
 ensures that taking the supremum (`sSup`) is a well-defined operation. The trivial upper bound is
-the total number of pairs of points, `\binom{n}{2}`.
+the total number of pairs of points, $\binom{n}{2}$.
 -/
 @[category test, AMS 52]
-theorem convexUnitDistanceCounts_BddAbove (n : ℕ) : BddAbove <| convexUnitDistanceCounts n := by
+theorem convexUnitDistanceCounts_bddAbove (n : ℕ) : BddAbove <| convexUnitDistanceCounts n := by
   unfold convexUnitDistanceCounts
   unfold unitDistancePairsCount
   use n.choose 2
@@ -62,15 +55,15 @@ theorem convexUnitDistanceCounts_BddAbove (n : ℕ) : BddAbove <| convexUnitDist
   simpa [offDiag_card, Nat.mul_sub_left_distrib, mul_one] using hdiv
 
 /--
-The **maximum number of unit distances** determined by the vertices of a convex `n`-gon.
-This function is often denoted as `U_c(n)` in combinatorics.
+The **maximum number of unit distances** determined by the vertices of a convex $n$-gon.
+This function is often denoted as $U_c(n)$ in combinatorics.
 -/
 noncomputable def maxConvexUnitDistances (n : ℕ) : ℕ :=
   sSup (convexUnitDistanceCounts n)
 
 /--
-Does the maximum number of unit distances determined by the vertices of a convex `n`-gon
-grow linearly in `n`?
+If $n$ points in $\mathbb{R}^2$ form a convex polygon then there are $O(n)$ many pairs which are
+distance $1$ apart.
 -/
 @[category research open, AMS 52]
 theorem erdos_96 :

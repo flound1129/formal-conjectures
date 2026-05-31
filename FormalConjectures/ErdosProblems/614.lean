@@ -49,7 +49,7 @@ vertices such that every subset of $k+2$ vertices induces a subgraph of maximum 
 least $k$.
 -/
 noncomputable def f (n k : ℕ) : ℕ :=
-  sInf {m : ℕ | ∀ G : SimpleGraph (Fin n), G.edgeSet.ncard = m → ∀ S : Finset (Fin n),
+  sInf {m : ℕ | ∃ G : SimpleGraph (Fin n), G.edgeSet.ncard = m ∧ ∀ S : Finset (Fin n),
     S.card = k + 2 → (G.induce (S : Set (Fin n))).maxDegree ≥ k}
 
 /--

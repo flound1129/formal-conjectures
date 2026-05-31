@@ -58,7 +58,7 @@ every set of $k+2$ vertices induces a subgraph with maximum degree at least $k$.
 $f(n,k)$.
 -/
 @[category research open, AMS 5]
-theorem erdos_614 (n k : ℕ) : f n k = answer(sorry) := by
+theorem erdos_614 : f = answer(sorry) := by
   sorry
 
 /--

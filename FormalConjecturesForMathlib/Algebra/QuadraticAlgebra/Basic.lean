@@ -27,8 +27,12 @@ variable {K : Type*} [Field K] {a b : K} [Fact (∀ r, r ^ 2 ≠ a + b * r)]
 
 attribute [-instance] instField
 
-@[simps] instance : NNRatCast (QuadraticAlgebra K a b) where nnratCast q := ⟨q, 0⟩
-@[simps] instance : RatCast (QuadraticAlgebra K a b) where ratCast q := ⟨q, 0⟩
+-- mathlib v4.30.0 (final) already provides `re_nnratCast` / `re_ratCast`
+-- projection lemmas for these casts, so the `@[simps]` that was valid against
+-- v4.30.0-rc2 now collides with existing names. The instances stay; only the
+-- attribute is dropped.
+instance : NNRatCast (QuadraticAlgebra K a b) where nnratCast q := ⟨q, 0⟩
+instance : RatCast (QuadraticAlgebra K a b) where ratCast q := ⟨q, 0⟩
 
 -- TODO: Replace in mathlib. See https://github.com/leanprover-community/mathlib4/pull/38818
 /-- If `K` is a field and there is no `r : K` such that `r ^ 2 = a + b * r`,
